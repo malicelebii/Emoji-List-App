@@ -1,24 +1,141 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="YL4-mn-g4G">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Emojis-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="MainViewController" customModule="EmojiListApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <searchBar contentMode="redraw" placeholder="Search for emoji" translatesAutoresizingMaskIntoConstraints="NO" id="yXb-Wg-wky">
+                                <rect key="frame" x="25" y="175" width="343" height="56"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="ocf-Ri-12t"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yXb-Wg-wky" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="25" id="AaD-xe-irH"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="yXb-Wg-wky" secondAttribute="trailing" constant="25" id="aWP-tN-kMF"/>
+                            <constraint firstItem="yXb-Wg-wky" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="20" id="fHB-hc-Lkz"/>
+                        </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Emojis" id="R4T-p9-rHa"/>
+                    <connections>
+                        <outlet property="searchBar" destination="yXb-Wg-wky" id="10w-qr-DeZ"/>
+                        <segue destination="Gsy-D3-8ds" kind="presentation" identifier="toDetailsVC" id="BOt-kI-oaE"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="2909.1603053435115" y="-27.464788732394368"/>
+        </scene>
+        <!--Details View Controller-->
+        <scene sceneID="QAz-Wq-5aa">
+            <objects>
+                <viewController id="Gsy-D3-8ds" customClass="DetailsViewController" customModule="EmojiListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nXo-sJ-EAY">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="842"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="P5V-53-0VM"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Rlj-9v-s8j" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3903" y="-27"/>
+        </scene>
+        <!--Emojis-->
+        <scene sceneID="EKU-tN-Bnn">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="kXe-T9-H7W" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Emojis" image="face.smiling.inverse" catalog="system" id="M5A-I4-XJr"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="ZYo-x0-hc7">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="QMu-G2-dbU"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="O4u-sh-V9h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1980.916030534351" y="-27.464788732394368"/>
+        </scene>
+        <!--Tab Bar Controller-->
+        <scene sceneID="xaV-4s-PKS">
+            <objects>
+                <tabBarController automaticallyAdjustsScrollViewInsets="NO" id="YL4-mn-g4G" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Nig-KU-7ug">
+                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </tabBar>
+                    <connections>
+                        <segue destination="kXe-T9-H7W" kind="relationship" relationship="viewControllers" id="cGk-6A-qKV"/>
+                        <segue destination="0E6-ht-2Xg" kind="relationship" relationship="viewControllers" id="SFS-Xd-E4v"/>
+                    </connections>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lIw-uF-iob" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054.1984732824426" y="-27.464788732394368"/>
+        </scene>
+        <!--Favorite Emojis-->
+        <scene sceneID="ln8-pg-zb8">
+            <objects>
+                <viewController id="MVd-Ha-051" customClass="FavoritesViewController" customModule="EmojiListApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="xLb-Bb-7nH">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="tSH-Hi-NBE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Favorite Emojis" id="Rvw-Kw-DbC"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lJG-dg-pzp" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1979.3893129770991" y="743.66197183098598"/>
+        </scene>
+        <!--Favorites-->
+        <scene sceneID="zrY-OA-FQ2">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="0E6-ht-2Xg" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Favorites" image="star.fill" catalog="system" id="sZ5-wa-dcI"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" largeTitles="YES" id="6yD-xO-jh6">
+                        <rect key="frame" x="0.0" y="59" width="393" height="96"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="MVd-Ha-051" kind="relationship" relationship="rootViewController" id="7ls-xI-G5F"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eGh-Yh-J8G" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1052.6717557251909" y="743.66197183098598"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="face.smiling.inverse" catalog="system" width="128" height="123"/>
+        <image name="star.fill" catalog="system" width="128" height="116"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
 </document>
