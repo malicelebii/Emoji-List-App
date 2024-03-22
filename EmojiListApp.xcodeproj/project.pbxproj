@@ -16,15 +16,16 @@
 		350CF2622BAAF92100F16C41 /* Emoji.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF2612BAAF92100F16C41 /* Emoji.swift */; };
 		350CF2672BAAFA7300F16C41 /* EmojiNetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF2662BAAFA7300F16C41 /* EmojiNetworkManager.swift */; };
 		350CF26D2BAB055F00F16C41 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF26C2BAB055F00F16C41 /* DetailsViewController.swift */; };
-		350CF26F2BAB057D00F16C41 /* DetailsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF26E2BAB057D00F16C41 /* DetailsViewModel.swift */; };
 		350CF2722BAB125D00F16C41 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF2712BAB125D00F16C41 /* SearchViewModel.swift */; };
 		350CF2752BAB12F700F16C41 /* EmojiCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF2742BAB12F700F16C41 /* EmojiCell.swift */; };
-		35B65F962BAC0D53005CB652 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B65F952BAC0D53005CB652 /* MainViewModel.swift */; };
 		35B65F982BAC2049005CB652 /* Counter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B65F972BAC2049005CB652 /* Counter.swift */; };
 		35B65F9B2BAC43EA005CB652 /* FavoritesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B65F9A2BAC43EA005CB652 /* FavoritesViewModel.swift */; };
 		35B65F9D2BAC4712005CB652 /* FavoriteEmojiCoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B65F9C2BAC4712005CB652 /* FavoriteEmojiCoreDataManager.swift */; };
 		35B65FA02BAC497C005CB652 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 35B65F9F2BAC497C005CB652 /* CoreData.framework */; };
 		35B65FA32BAC49BA005CB652 /* FavoriteEmojiModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 35B65FA12BAC49BA005CB652 /* FavoriteEmojiModel.xcdatamodeld */; };
+		35B65FB92BAC7759005CB652 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B65FB82BAC7759005CB652 /* FavoritesViewController.swift */; };
+		35DDBC872BAD9B17004C3F4F /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */; };
+		35DDBC892BADA46E004C3F4F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35DDBC882BADA46E004C3F4F /* Config.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,15 +40,16 @@
 		350CF2612BAAF92100F16C41 /* Emoji.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Emoji.swift; sourceTree = "<group>"; };
 		350CF2662BAAFA7300F16C41 /* EmojiNetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiNetworkManager.swift; sourceTree = "<group>"; };
 		350CF26C2BAB055F00F16C41 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
-		350CF26E2BAB057D00F16C41 /* DetailsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewModel.swift; sourceTree = "<group>"; };
 		350CF2712BAB125D00F16C41 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		350CF2742BAB12F700F16C41 /* EmojiCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiCell.swift; sourceTree = "<group>"; };
-		35B65F952BAC0D53005CB652 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		35B65F972BAC2049005CB652 /* Counter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Counter.swift; sourceTree = "<group>"; };
 		35B65F9A2BAC43EA005CB652 /* FavoritesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewModel.swift; sourceTree = "<group>"; };
 		35B65F9C2BAC4712005CB652 /* FavoriteEmojiCoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteEmojiCoreDataManager.swift; sourceTree = "<group>"; };
 		35B65F9F2BAC497C005CB652 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		35B65FA22BAC49BA005CB652 /* FavoriteEmojiModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = FavoriteEmojiModel.xcdatamodel; sourceTree = "<group>"; };
+		35B65FB82BAC7759005CB652 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
+		35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
+		35DDBC882BADA46E004C3F4F /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 		350CF24A2BAAF8D500F16C41 /* EmojiListApp */ = {
 			isa = PBXGroup;
 			children = (
+				35DDBC852BAD9AFC004C3F4F /* Extensions */,
 				350CF2682BAB04FD00F16C41 /* Modules */,
 				350CF2652BAAFA4C00F16C41 /* Service */,
 				350CF25F2BAAF90900F16C41 /* Models */,
@@ -92,6 +95,7 @@
 				350CF2562BAAF8D700F16C41 /* LaunchScreen.storyboard */,
 				350CF2592BAAF8D700F16C41 /* Info.plist */,
 				35B65F972BAC2049005CB652 /* Counter.swift */,
+				35DDBC882BADA46E004C3F4F /* Config.plist */,
 			);
 			path = EmojiListApp;
 			sourceTree = "<group>";
@@ -129,7 +133,6 @@
 			isa = PBXGroup;
 			children = (
 				350CF26C2BAB055F00F16C41 /* DetailsViewController.swift */,
-				350CF26E2BAB057D00F16C41 /* DetailsViewModel.swift */,
 			);
 			path = Details;
 			sourceTree = "<group>";
@@ -147,7 +150,6 @@
 			children = (
 				350CF24F2BAAF8D500F16C41 /* MainViewController.swift */,
 				350CF2742BAB12F700F16C41 /* EmojiCell.swift */,
-				35B65F952BAC0D53005CB652 /* MainViewModel.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -156,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				35B65F9A2BAC43EA005CB652 /* FavoritesViewModel.swift */,
+				35B65FB82BAC7759005CB652 /* FavoritesViewController.swift */,
 			);
 			path = Favorites;
 			sourceTree = "<group>";
@@ -166,6 +169,14 @@
 				35B65F9F2BAC497C005CB652 /* CoreData.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		35DDBC852BAD9AFC004C3F4F /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -226,6 +237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				35DDBC892BADA46E004C3F4F /* Config.plist in Resources */,
 				350CF2582BAAF8D700F16C41 /* LaunchScreen.storyboard in Resources */,
 				350CF2552BAAF8D700F16C41 /* Assets.xcassets in Resources */,
 				350CF2532BAAF8D500F16C41 /* Main.storyboard in Resources */,
@@ -246,12 +258,12 @@
 				350CF2722BAB125D00F16C41 /* SearchViewModel.swift in Sources */,
 				350CF2622BAAF92100F16C41 /* Emoji.swift in Sources */,
 				35B65FA32BAC49BA005CB652 /* FavoriteEmojiModel.xcdatamodeld in Sources */,
-				350CF26F2BAB057D00F16C41 /* DetailsViewModel.swift in Sources */,
 				35B65F9B2BAC43EA005CB652 /* FavoritesViewModel.swift in Sources */,
-				35B65F962BAC0D53005CB652 /* MainViewModel.swift in Sources */,
+				35DDBC872BAD9B17004C3F4F /* UIViewExtensions.swift in Sources */,
 				350CF26D2BAB055F00F16C41 /* DetailsViewController.swift in Sources */,
 				350CF24E2BAAF8D500F16C41 /* SceneDelegate.swift in Sources */,
 				350CF2752BAB12F700F16C41 /* EmojiCell.swift in Sources */,
+				35B65FB92BAC7759005CB652 /* FavoritesViewController.swift in Sources */,
 				350CF2672BAAFA7300F16C41 /* EmojiNetworkManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
