@@ -13,7 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
+        let path = Bundle.main.path(forResource: "Config", ofType: "plist")
+        let url = URL(filePath: path!)
+        do {
+            let data = try Data(contentsOf: url)
+            let plist = try PropertyListSerialization.propertyList(from: data, options: .mutableContainers, format: nil) as? [String: String]
+            EmojiNetworkManager.apiKey = plist!["apiKey"]!
+        } catch  {
+            
+        }
         return true
     }
 
