@@ -1,5 +1,9 @@
 import Foundation
 
+protocol SearchViewModelDelegate {
+    func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ())
+}
+
 class SearchViewModel {
     
     func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ()) {
