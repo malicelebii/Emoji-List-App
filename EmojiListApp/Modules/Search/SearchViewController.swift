@@ -1,6 +1,6 @@
 import UIKit
 
-class MainViewController: UIViewController {
+class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var emojis = [Emoji]() {
         didSet {
@@ -51,7 +51,7 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return emojis.count
     }
@@ -76,7 +76,7 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         guard searchText.count != 0 else { emojis.removeAll(); return }
         guard searchText.count > 2 else { return }
