@@ -1,33 +1,33 @@
 import UIKit
 
+protocol FavoritesViewDelegate: AnyObject {
+    func reloadCollectionView()
+    func configureCollectionView()
+}
+
 class FavoritesViewController: UIViewController {
     let favoritesViewModel = FavoritesViewModel()
     
     var favEmojisCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    var favEmojis = [Emoji]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.favEmojisCollectionView.reloadData()
-            }
-        }
-    }
+    
     var selectedCellIndex: Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favEmojisCollectionView.dataSource = self
-        favEmojisCollectionView.delegate = self
-        configureCollectionView()
+        favoritesViewModel.view = self
+        favoritesViewModel.viewDidLoad()
         setupLongGestureToDeleteFavEmoji()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         favoritesViewModel.getAllFavoriteEmojis { emojis in
-            self.favEmojis = emojis
+            self.favoritesViewModel.favEmojis = emojis
         }
     }
     
     func configureCollectionView() {
+        favEmojisCollectionView.dataSource = self
+        favEmojisCollectionView.delegate = self
         view.addSubview(favEmojisCollectionView)
         setupCollectionViewLayout()
         favEmojisCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
@@ -64,9 +64,9 @@ class FavoritesViewController: UIViewController {
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            self.favoritesViewModel.deleteFavoriteWith(name: (self.favEmojis[self.selectedCellIndex!].name)!) {
+            self.favoritesViewModel.deleteFavoriteWith(name: (self.favoritesViewModel.favEmojis[self.selectedCellIndex!].name)!) {
                 self.favoritesViewModel.getAllFavoriteEmojis { emojis in
-                    self.favEmojis = emojis
+                    self.favoritesViewModel.favEmojis = emojis
                     self.view.showToast(message: "You have deleted emoji successfully")
                 }
             }
@@ -76,14 +76,23 @@ class FavoritesViewController: UIViewController {
    
  }
 
+extension FavoritesViewController: FavoritesViewDelegate {
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.favEmojisCollectionView.reloadData()
+        }
+    }
+}
+
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favEmojis.count
+        return self.favoritesViewModel.numberOfItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let emojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCell.cellIdentifier, for: indexPath) as! EmojiCell
-        let emoji = favEmojis[indexPath.row]
+        let emoji = self.favoritesViewModel.cellForItem(at: indexPath)
         emojiCell.configureCell(emoji: emoji)
         setupDeleteImagePress(cell: emojiCell)
         emojiCell.index = indexPath.row

@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		350CF24C2BAAF8D500F16C41 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF24B2BAAF8D500F16C41 /* AppDelegate.swift */; };
 		350CF24E2BAAF8D500F16C41 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF24D2BAAF8D500F16C41 /* SceneDelegate.swift */; };
-		350CF2502BAAF8D500F16C41 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF24F2BAAF8D500F16C41 /* MainViewController.swift */; };
+		350CF2502BAAF8D500F16C41 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 350CF24F2BAAF8D500F16C41 /* SearchViewController.swift */; };
 		350CF2532BAAF8D500F16C41 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 350CF2512BAAF8D500F16C41 /* Main.storyboard */; };
 		350CF2552BAAF8D700F16C41 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 350CF2542BAAF8D700F16C41 /* Assets.xcassets */; };
 		350CF2582BAAF8D700F16C41 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 350CF2562BAAF8D700F16C41 /* LaunchScreen.storyboard */; };
@@ -26,13 +26,14 @@
 		35B65FB92BAC7759005CB652 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35B65FB82BAC7759005CB652 /* FavoritesViewController.swift */; };
 		35DDBC872BAD9B17004C3F4F /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */; };
 		35DDBC892BADA46E004C3F4F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35DDBC882BADA46E004C3F4F /* Config.plist */; };
+		35F69B352C10999A0045615F /* NetworkManagerEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F69B342C10999A0045615F /* NetworkManagerEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		350CF2482BAAF8D500F16C41 /* EmojiListApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiListApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		350CF24B2BAAF8D500F16C41 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		350CF24D2BAAF8D500F16C41 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		350CF24F2BAAF8D500F16C41 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		350CF24F2BAAF8D500F16C41 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		350CF2522BAAF8D500F16C41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		350CF2542BAAF8D700F16C41 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		350CF2572BAAF8D700F16C41 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -50,6 +51,7 @@
 		35B65FB82BAC7759005CB652 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		35DDBC882BADA46E004C3F4F /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
+		35F69B342C10999A0045615F /* NetworkManagerEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,13 +90,14 @@
 				350CF2682BAB04FD00F16C41 /* Modules */,
 				350CF2652BAAFA4C00F16C41 /* Service */,
 				350CF25F2BAAF90900F16C41 /* Models */,
+				35F69B332C1099850045615F /* Enums */,
+				35F69B322C1099640045615F /* Helpers */,
 				350CF24B2BAAF8D500F16C41 /* AppDelegate.swift */,
 				350CF24D2BAAF8D500F16C41 /* SceneDelegate.swift */,
 				350CF2512BAAF8D500F16C41 /* Main.storyboard */,
 				350CF2542BAAF8D700F16C41 /* Assets.xcassets */,
 				350CF2562BAAF8D700F16C41 /* LaunchScreen.storyboard */,
 				350CF2592BAAF8D700F16C41 /* Info.plist */,
-				35B65F972BAC2049005CB652 /* Counter.swift */,
 				35DDBC882BADA46E004C3F4F /* Config.plist */,
 			);
 			path = EmojiListApp;
@@ -122,9 +125,9 @@
 			isa = PBXGroup;
 			children = (
 				35B65F992BAC43DB005CB652 /* Favorites */,
-				350CF2732BAB12AC00F16C41 /* Main */,
 				350CF2702BAB08A500F16C41 /* Search */,
 				350CF26B2BAB054E00F16C41 /* Details */,
+				350CF2742BAB12F700F16C41 /* EmojiCell.swift */,
 			);
 			path = Modules;
 			sourceTree = "<group>";
@@ -140,18 +143,10 @@
 		350CF2702BAB08A500F16C41 /* Search */ = {
 			isa = PBXGroup;
 			children = (
+				350CF24F2BAAF8D500F16C41 /* SearchViewController.swift */,
 				350CF2712BAB125D00F16C41 /* SearchViewModel.swift */,
 			);
 			path = Search;
-			sourceTree = "<group>";
-		};
-		350CF2732BAB12AC00F16C41 /* Main */ = {
-			isa = PBXGroup;
-			children = (
-				350CF24F2BAAF8D500F16C41 /* MainViewController.swift */,
-				350CF2742BAB12F700F16C41 /* EmojiCell.swift */,
-			);
-			path = Main;
 			sourceTree = "<group>";
 		};
 		35B65F992BAC43DB005CB652 /* Favorites */ = {
@@ -177,6 +172,22 @@
 				35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		35F69B322C1099640045615F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				35B65F972BAC2049005CB652 /* Counter.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		35F69B332C1099850045615F /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				35F69B342C10999A0045615F /* NetworkManagerEnum.swift */,
+			);
+			path = Enums;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -251,8 +262,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				350CF2502BAAF8D500F16C41 /* MainViewController.swift in Sources */,
+				350CF2502BAAF8D500F16C41 /* SearchViewController.swift in Sources */,
 				35B65F9D2BAC4712005CB652 /* FavoriteEmojiCoreDataManager.swift in Sources */,
+				35F69B352C10999A0045615F /* NetworkManagerEnum.swift in Sources */,
 				350CF24C2BAAF8D500F16C41 /* AppDelegate.swift in Sources */,
 				35B65F982BAC2049005CB652 /* Counter.swift in Sources */,
 				350CF2722BAB125D00F16C41 /* SearchViewModel.swift in Sources */,

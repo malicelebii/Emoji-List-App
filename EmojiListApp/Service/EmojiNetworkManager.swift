@@ -36,9 +36,3 @@ final class EmojiNetworkManager: NetworkRequestDelegate {
         task.resume()
     }
 }
-
-enum NetworkErrorEnum: String, Error {
-    case badURL = "Url is not valid"
-    case badRequest = "Request invalid"
-    case decodeError = "Data cannot be decoded"
-}

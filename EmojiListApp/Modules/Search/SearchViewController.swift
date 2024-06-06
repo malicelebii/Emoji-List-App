@@ -1,31 +1,26 @@
 import UIKit
 
-class MainViewController: UIViewController {
+protocol SearchViewDelegate: AnyObject {
+    func reloadCollectionView()
+    func configureCollectionView()
+}
+
+class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
-    var emojis = [Emoji]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.emojiCollectionView.reloadData()
-            }
-        }
-    }
-    
+    var emojiCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     var counter: Counter?
     var searchViewModel = SearchViewModel()
     
-    
-    var emojiCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        emojiCollectionView.dataSource = self
-        emojiCollectionView.delegate = self
         searchBar.delegate = self
-        configureCollectionView()
+        searchViewModel.view = self
+        searchViewModel.viewDidLoad()
     }
 
     func configureCollectionView(){
+        emojiCollectionView.dataSource = self
+        emojiCollectionView.delegate = self
         view.addSubview(emojiCollectionView)
         setupCollectionViewLayout()
         emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
@@ -51,20 +46,29 @@ class MainViewController: UIViewController {
     }
 }
 
-extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension SearchViewController: SearchViewDelegate {
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.emojiCollectionView.reloadData()
+        }
+    }
+}
+
+extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return emojis.count
+        return searchViewModel.numberOfItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCell.cellIdentifier, for: indexPath) as! EmojiCell
-        let emoji = emojis[indexPath.row]
+        let emoji = searchViewModel.cellForItem(at: indexPath)
         cell.configureCell(emoji: emoji)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let emoji = emojis[indexPath.row]
+        let emoji = searchViewModel.didSelectItem(at: indexPath.item)
         performSegue(withIdentifier: "toDetailsVC", sender: emoji)
     }
     
@@ -76,18 +80,9 @@ extension MainViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
 }
 
-extension MainViewController: UISearchBarDelegate {
+extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard searchText.count != 0 else { emojis.removeAll(); return }
-        guard searchText.count > 2 else { return }
-        
-        counter?.timer?.invalidate()
-        counter = Counter(delay: 1) {
-            self.searchViewModel.getEmojisWith(name: searchText) { emojis in
-                self.emojis = emojis
-            }
-        }
-        counter?.call()
+        self.searchViewModel.searchTextDidChange(searchText: searchText)
     }
 }
 
