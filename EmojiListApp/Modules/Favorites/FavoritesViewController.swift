@@ -1,5 +1,9 @@
 import UIKit
 
+protocol FavoritesViewDelegate: AnyObject {
+    func reloadCollectionView()
+}
+
 class FavoritesViewController: UIViewController {
     let favoritesViewModel = FavoritesViewModel()
     
@@ -75,6 +79,15 @@ class FavoritesViewController: UIViewController {
     }
    
  }
+
+extension FavoritesViewController: FavoritesViewDelegate {
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.favEmojisCollectionView.reloadData()
+        }
+    }
+}
 
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
