@@ -9,16 +9,22 @@ protocol SearchViewModelDelegate {
     func didSelectItem(at: Int) -> Emoji
 }
 
-class SearchViewModel {
+class SearchViewModel: SearchViewModelDelegate {
     weak var view: SearchViewDelegate?
+    let networkManager: EmojiNetworkManager
     var emojis: [Emoji] = [] {
         didSet {
             self.view?.reloadCollectionView()
         }
     }
     
+    init(view: SearchViewDelegate? = nil, networkManager: EmojiNetworkManager = EmojiNetworkManager.shared) {
+        self.view = view
+        self.networkManager = networkManager
+    }
+    
     func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ()) {
-        EmojiNetworkManager.shared.getEmojisWith(name: name) { result in
+        networkManager.getEmojisWith(name: name) { result in
             switch result {
             case .success(let emojis):
                 completion(emojis)
