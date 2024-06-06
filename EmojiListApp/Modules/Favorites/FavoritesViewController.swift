@@ -8,13 +8,7 @@ class FavoritesViewController: UIViewController {
     let favoritesViewModel = FavoritesViewModel()
     
     var favEmojisCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    var favEmojis = [Emoji]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.favEmojisCollectionView.reloadData()
-            }
-        }
-    }
+    
     var selectedCellIndex: Int?
     
     override func viewDidLoad() {
@@ -27,7 +21,7 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         favoritesViewModel.getAllFavoriteEmojis { emojis in
-            self.favEmojis = emojis
+            self.favoritesViewModel.favEmojis = emojis
         }
     }
     
@@ -68,9 +62,9 @@ class FavoritesViewController: UIViewController {
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            self.favoritesViewModel.deleteFavoriteWith(name: (self.favEmojis[self.selectedCellIndex!].name)!) {
+            self.favoritesViewModel.deleteFavoriteWith(name: (self.favoritesViewModel.favEmojis[self.selectedCellIndex!].name)!) {
                 self.favoritesViewModel.getAllFavoriteEmojis { emojis in
-                    self.favEmojis = emojis
+                    self.favoritesViewModel.favEmojis = emojis
                     self.view.showToast(message: "You have deleted emoji successfully")
                 }
             }
@@ -91,12 +85,12 @@ extension FavoritesViewController: FavoritesViewDelegate {
 
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favEmojis.count
+        return self.favoritesViewModel.favEmojis.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let emojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCell.cellIdentifier, for: indexPath) as! EmojiCell
-        let emoji = favEmojis[indexPath.row]
+        let emoji = self.favoritesViewModel.favEmojis[indexPath.row]
         emojiCell.configureCell(emoji: emoji)
         setupDeleteImagePress(cell: emojiCell)
         emojiCell.index = indexPath.row

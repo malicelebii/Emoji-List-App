@@ -9,6 +9,11 @@ protocol FavoritesViewModelDelegate {
 
 class FavoritesViewModel: FavoritesViewModelDelegate {
     weak var view: FavoritesViewDelegate?
+    var favEmojis: [Emoji] = [] {
+        didSet {
+            self.view?.reloadCollectionView()
+        }
+    }
     
     init(view: FavoritesViewDelegate? = nil) {
         self.view = view
