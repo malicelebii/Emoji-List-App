@@ -10,6 +10,12 @@ protocol SearchViewModelDelegate {
 }
 
 class SearchViewModel {
+    weak var view: SearchViewDelegate?
+    var emojis: [Emoji] = [] {
+        didSet {
+            self.view?.reloadCollectionView()
+        }
+    }
     
     func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ()) {
         EmojiNetworkManager.shared.getEmojisWith(name: name) { result in
@@ -22,5 +28,21 @@ class SearchViewModel {
                 break
             }
         }
+    }
+    
+    func numberOfItemsInSection() -> Int {
+        return emojis.count
+    }
+    
+    func cellForItem(at indexPath: IndexPath) -> Emoji {
+        return emojis[indexPath.item]
+    }
+    
+    func didSelectItem(at: Int) -> Emoji {
+        return emojis[at]
+    }
+    
+    func viewDidLoad() {
+        view?.configureCollectionView()
     }
 }

@@ -7,14 +7,6 @@ protocol SearchViewDelegate: AnyObject {
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
-    var emojis = [Emoji]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.emojiCollectionView.reloadData()
-            }
-        }
-    }
-    
     var counter: Counter?
     var searchViewModel = SearchViewModel()
     
@@ -66,18 +58,18 @@ extension SearchViewController: SearchViewDelegate {
 
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return emojis.count
+        return searchViewModel.numberOfItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCell.cellIdentifier, for: indexPath) as! EmojiCell
-        let emoji = emojis[indexPath.row]
+        let emoji = searchViewModel.cellForItem(at: indexPath)
         cell.configureCell(emoji: emoji)
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let emoji = emojis[indexPath.row]
+        let emoji = searchViewModel.didSelectItem(at: indexPath.item)
         performSegue(withIdentifier: "toDetailsVC", sender: emoji)
     }
     
@@ -91,13 +83,13 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard searchText.count != 0 else { emojis.removeAll(); return }
+        guard searchText.count != 0 else { self.searchViewModel.emojis.removeAll(); return }
         guard searchText.count > 2 else { return }
         
         counter?.timer?.invalidate()
         counter = Counter(delay: 1) {
             self.searchViewModel.getEmojisWith(name: searchText) { emojis in
-                self.emojis = emojis
+                self.searchViewModel.emojis = emojis
             }
         }
         counter?.call()
