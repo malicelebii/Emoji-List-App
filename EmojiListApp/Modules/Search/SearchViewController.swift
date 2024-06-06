@@ -23,14 +23,13 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        emojiCollectionView.dataSource = self
-        emojiCollectionView.delegate = self
         searchBar.delegate = self
         configureCollectionView()
     }
 
     func configureCollectionView(){
+        emojiCollectionView.dataSource = self
+        emojiCollectionView.delegate = self
         view.addSubview(emojiCollectionView)
         setupCollectionViewLayout()
         emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
