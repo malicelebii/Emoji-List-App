@@ -87,12 +87,12 @@ extension FavoritesViewController: FavoritesViewDelegate {
 
 extension FavoritesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return self.favoritesViewModel.favEmojis.count
+        return self.favoritesViewModel.numberOfItemsInSection()
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let emojiCell = collectionView.dequeueReusableCell(withReuseIdentifier: EmojiCell.cellIdentifier, for: indexPath) as! EmojiCell
-        let emoji = self.favoritesViewModel.favEmojis[indexPath.row]
+        let emoji = self.favoritesViewModel.cellForItem(at: indexPath)
         emojiCell.configureCell(emoji: emoji)
         setupDeleteImagePress(cell: emojiCell)
         emojiCell.index = indexPath.row

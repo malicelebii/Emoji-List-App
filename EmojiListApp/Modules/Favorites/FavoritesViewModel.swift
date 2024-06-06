@@ -3,6 +3,8 @@ import Foundation
 protocol FavoritesViewModelDelegate {
     var view: FavoritesViewDelegate? { get set }
     func viewDidLoad()
+    func numberOfItemsInSection() -> Int
+    func cellForItem(at indexPath: IndexPath) -> Emoji
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ())
     func getAllFavoriteEmojis(completion: @escaping ([Emoji]) -> ())
     func deleteFavoriteWith(name: String, completion: @escaping () -> ())
@@ -24,6 +26,14 @@ class FavoritesViewModel {
 extension FavoritesViewModel: FavoritesViewModelDelegate {
     func viewDidLoad() {
         self.view?.configureCollectionView()
+    }
+    
+    func numberOfItemsInSection() -> Int {
+        return favEmojis.count
+    }
+    
+    func cellForItem(at indexPath: IndexPath) -> Emoji {
+        return favEmojis[indexPath.item]
     }
     
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ()) {
