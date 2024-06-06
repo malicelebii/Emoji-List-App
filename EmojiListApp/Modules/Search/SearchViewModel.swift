@@ -10,7 +10,7 @@ protocol SearchViewModelDelegate {
     func searchTextDidChange(searchText: String)
 }
 
-class SearchViewModel: SearchViewModelDelegate {
+class SearchViewModel {
     weak var view: SearchViewDelegate?
     var counter: Counter?
     let networkManager: EmojiNetworkManager
@@ -24,7 +24,10 @@ class SearchViewModel: SearchViewModelDelegate {
         self.view = view
         self.networkManager = networkManager
     }
-    
+}
+
+extension SearchViewModel: SearchViewModelDelegate {
+
     func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ()) {
         networkManager.getEmojisWith(name: name) { result in
             switch result {
