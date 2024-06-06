@@ -12,14 +12,16 @@ protocol FavoritesViewModelDelegate {
 
 class FavoritesViewModel {
     weak var view: FavoritesViewDelegate?
+    let favEmojiCoreDataManager: FavoriteEmojiCoreDataManager
     var favEmojis: [Emoji] = [] {
         didSet {
             self.view?.reloadCollectionView()
         }
     }
     
-    init(view: FavoritesViewDelegate? = nil) {
+    init(view: FavoritesViewDelegate? = nil, favEmojiCoreDataManager: FavoriteEmojiCoreDataManager = FavoriteEmojiCoreDataManager.shared ) {
         self.view = view
+        self.favEmojiCoreDataManager = favEmojiCoreDataManager
     }
 }
 
@@ -37,13 +39,13 @@ extension FavoritesViewModel: FavoritesViewModelDelegate {
     }
     
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ()) {
-        FavoriteEmojiCoreDataManager.shared.save(favoriteEmoji: emoji) {
+        self.favEmojiCoreDataManager.save(favoriteEmoji: emoji) {
             completion()
         }
     }
     
     func getAllFavoriteEmojis(completion: @escaping ([Emoji]) -> ()) {
-        FavoriteEmojiCoreDataManager.shared.getFavoriteEmojis { favEmojis in
+        self.favEmojiCoreDataManager.getFavoriteEmojis { favEmojis in
             var emojis = [Emoji]()
             favEmojis.forEach { favEmoji in
                 let emoji = Emoji(name: favEmoji.name, character: favEmoji.character)
@@ -54,7 +56,7 @@ extension FavoritesViewModel: FavoritesViewModelDelegate {
     }
     
     func deleteFavoriteWith(name: String, completion: @escaping () -> ()) {
-        FavoriteEmojiCoreDataManager.shared.deleteEmojiWith(name: name) {
+        self.favEmojiCoreDataManager.deleteEmojiWith(name: name) {
             completion()
         }
     }
