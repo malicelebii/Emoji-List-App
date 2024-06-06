@@ -2,12 +2,13 @@ import Foundation
 
 protocol FavoritesViewModelDelegate {
     var view: FavoritesViewDelegate? { get set }
+    func viewDidLoad()
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ())
     func getAllFavoriteEmojis(completion: @escaping ([Emoji]) -> ())
     func deleteFavoriteWith(name: String, completion: @escaping () -> ())
 }
 
-class FavoritesViewModel: FavoritesViewModelDelegate {
+class FavoritesViewModel {
     weak var view: FavoritesViewDelegate?
     var favEmojis: [Emoji] = [] {
         didSet {
@@ -17,6 +18,12 @@ class FavoritesViewModel: FavoritesViewModelDelegate {
     
     init(view: FavoritesViewDelegate? = nil) {
         self.view = view
+    }
+}
+
+extension FavoritesViewModel: FavoritesViewModelDelegate {
+    func viewDidLoad() {
+        self.view?.configureCollectionView()
     }
     
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ()) {

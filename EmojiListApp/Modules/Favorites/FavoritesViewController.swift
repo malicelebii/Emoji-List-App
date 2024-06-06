@@ -2,6 +2,7 @@ import UIKit
 
 protocol FavoritesViewDelegate: AnyObject {
     func reloadCollectionView()
+    func configureCollectionView()
 }
 
 class FavoritesViewController: UIViewController {
@@ -13,7 +14,8 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        configureCollectionView()
+        favoritesViewModel.view = self
+        favoritesViewModel.viewDidLoad()
         setupLongGestureToDeleteFavEmoji()
     }
     
