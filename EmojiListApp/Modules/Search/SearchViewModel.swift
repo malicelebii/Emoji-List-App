@@ -7,10 +7,12 @@ protocol SearchViewModelDelegate {
     func numberOfItemsInSection() -> Int
     func cellForItem(at indexPath: IndexPath) -> Emoji
     func didSelectItem(at: Int) -> Emoji
+    func searchTextDidChange(searchText: String)
 }
 
 class SearchViewModel: SearchViewModelDelegate {
     weak var view: SearchViewDelegate?
+    var counter: Counter?
     let networkManager: EmojiNetworkManager
     var emojis: [Emoji] = [] {
         didSet {
@@ -50,5 +52,18 @@ class SearchViewModel: SearchViewModelDelegate {
     
     func viewDidLoad() {
         view?.configureCollectionView()
+    }
+    
+    func searchTextDidChange(searchText: String) {
+        guard searchText.count != 0 else { self.emojis.removeAll(); return }
+        guard searchText.count > 2 else { return }
+        
+        counter?.timer?.invalidate()
+        counter = Counter(delay: 1) {
+            self.getEmojisWith(name: searchText) { emojis in
+                self.emojis = emojis
+            }
+        }
+        counter?.call()
     }
 }

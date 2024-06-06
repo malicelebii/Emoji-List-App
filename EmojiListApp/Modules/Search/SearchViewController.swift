@@ -82,16 +82,7 @@ extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSo
 
 extension SearchViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        guard searchText.count != 0 else { self.searchViewModel.emojis.removeAll(); return }
-        guard searchText.count > 2 else { return }
-        
-        counter?.timer?.invalidate()
-        counter = Counter(delay: 1) {
-            self.searchViewModel.getEmojisWith(name: searchText) { emojis in
-                self.searchViewModel.emojis = emojis
-            }
-        }
-        counter?.call()
+        self.searchViewModel.searchTextDidChange(searchText: searchText)
     }
 }
 
