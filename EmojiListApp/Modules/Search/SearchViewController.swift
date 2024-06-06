@@ -7,16 +7,15 @@ protocol SearchViewDelegate: AnyObject {
 
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
+    var emojiCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     var counter: Counter?
     var searchViewModel = SearchViewModel()
-    
-    
-    var emojiCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
     
     override func viewDidLoad() {
         super.viewDidLoad()
         searchBar.delegate = self
-        configureCollectionView()
+        searchViewModel.view = self
+        searchViewModel.viewDidLoad()
     }
 
     func configureCollectionView(){
