@@ -1,5 +1,10 @@
 import UIKit
 
+protocol SearchViewDelegate: AnyObject {
+    func reloadCollectionView()
+    func configureCollectionView()
+}
+
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var emojis = [Emoji]() {
