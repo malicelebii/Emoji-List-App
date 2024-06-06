@@ -13,8 +13,6 @@ class FavoritesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        favEmojisCollectionView.dataSource = self
-        favEmojisCollectionView.delegate = self
         configureCollectionView()
         setupLongGestureToDeleteFavEmoji()
     }
@@ -26,6 +24,8 @@ class FavoritesViewController: UIViewController {
     }
     
     func configureCollectionView() {
+        favEmojisCollectionView.dataSource = self
+        favEmojisCollectionView.delegate = self
         view.addSubview(favEmojisCollectionView)
         setupCollectionViewLayout()
         favEmojisCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
