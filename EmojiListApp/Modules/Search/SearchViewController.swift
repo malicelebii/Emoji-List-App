@@ -56,6 +56,15 @@ class SearchViewController: UIViewController {
     }
 }
 
+extension SearchViewController: SearchViewDelegate {
+    func reloadCollectionView() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            self.emojiCollectionView.reloadData()
+        }
+    }
+}
+
 extension SearchViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return emojis.count
