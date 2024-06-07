@@ -27,6 +27,7 @@
 		35DDBC872BAD9B17004C3F4F /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */; };
 		35DDBC892BADA46E004C3F4F /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 35DDBC882BADA46E004C3F4F /* Config.plist */; };
 		35F69B352C10999A0045615F /* NetworkManagerEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F69B342C10999A0045615F /* NetworkManagerEnum.swift */; };
+		35F69B372C1301E90045615F /* CoreDataErrorEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 35F69B362C1301E90045615F /* CoreDataErrorEnum.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -52,6 +53,7 @@
 		35DDBC862BAD9B17004C3F4F /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		35DDBC882BADA46E004C3F4F /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Config.plist; sourceTree = "<group>"; };
 		35F69B342C10999A0045615F /* NetworkManagerEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManagerEnum.swift; sourceTree = "<group>"; };
+		35F69B362C1301E90045615F /* CoreDataErrorEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataErrorEnum.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -186,6 +188,7 @@
 			isa = PBXGroup;
 			children = (
 				35F69B342C10999A0045615F /* NetworkManagerEnum.swift */,
+				35F69B362C1301E90045615F /* CoreDataErrorEnum.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				35B65F9D2BAC4712005CB652 /* FavoriteEmojiCoreDataManager.swift in Sources */,
 				35F69B352C10999A0045615F /* NetworkManagerEnum.swift in Sources */,
 				350CF24C2BAAF8D500F16C41 /* AppDelegate.swift in Sources */,
+				35F69B372C1301E90045615F /* CoreDataErrorEnum.swift in Sources */,
 				35B65F982BAC2049005CB652 /* Counter.swift in Sources */,
 				350CF2722BAB125D00F16C41 /* SearchViewModel.swift in Sources */,
 				350CF2622BAAF92100F16C41 /* Emoji.swift in Sources */,
