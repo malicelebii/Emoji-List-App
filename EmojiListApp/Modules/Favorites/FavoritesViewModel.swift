@@ -12,14 +12,14 @@ protocol FavoritesViewModelDelegate {
 
 class FavoritesViewModel {
     weak var view: FavoritesViewDelegate?
-    let favEmojiCoreDataManager: FavoriteEmojiCoreDataManager
+    let favEmojiCoreDataManager: FavoriteEmojiCoreDataDelegate
     var favEmojis: [Emoji] = [] {
         didSet {
             self.view?.reloadCollectionView()
         }
     }
     
-    init(view: FavoritesViewDelegate? = nil, favEmojiCoreDataManager: FavoriteEmojiCoreDataManager = FavoriteEmojiCoreDataManager.shared ) {
+    init(view: FavoritesViewDelegate? = nil, favEmojiCoreDataManager: FavoriteEmojiCoreDataDelegate = FavoriteEmojiCoreDataManager.shared ) {
         self.view = view
         self.favEmojiCoreDataManager = favEmojiCoreDataManager
     }

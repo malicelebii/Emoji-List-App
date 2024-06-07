@@ -13,14 +13,14 @@ protocol SearchViewModelDelegate {
 class SearchViewModel {
     weak var view: SearchViewDelegate?
     var counter: Counter?
-    let networkManager: EmojiNetworkManager
+    let networkManager: NetworkRequestDelegate
     var emojis: [Emoji] = [] {
         didSet {
             self.view?.reloadCollectionView()
         }
     }
     
-    init(view: SearchViewDelegate? = nil, networkManager: EmojiNetworkManager = EmojiNetworkManager.shared) {
+    init(view: SearchViewDelegate? = nil, networkManager: NetworkRequestDelegate = EmojiNetworkManager.shared) {
         self.view = view
         self.networkManager = networkManager
     }
