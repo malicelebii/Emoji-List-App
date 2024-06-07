@@ -25,14 +25,6 @@ class FavoritesViewController: UIViewController {
             self.favoritesViewModel.favEmojis = emojis
         }
     }
-    
-    func configureCollectionView() {
-        favEmojisCollectionView.dataSource = self
-        favEmojisCollectionView.delegate = self
-        view.addSubview(favEmojisCollectionView)
-        setupCollectionViewLayout()
-        favEmojisCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
-        setupCollectionViewConstraints()
     }
     
     func setupCollectionViewLayout() {
@@ -83,6 +75,15 @@ extension FavoritesViewController: FavoritesViewDelegate {
             guard let self = self else { return }
             self.favEmojisCollectionView.reloadData()
         }
+    }
+    
+    func configureCollectionView() {
+        favEmojisCollectionView.dataSource = self
+        favEmojisCollectionView.delegate = self
+        view.addSubview(favEmojisCollectionView)
+        setupCollectionViewLayout()
+        favEmojisCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
+        setupCollectionViewConstraints()
     }
     
     func showToast(with message: String) {
