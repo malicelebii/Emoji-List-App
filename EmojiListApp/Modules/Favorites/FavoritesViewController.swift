@@ -3,6 +3,7 @@ import UIKit
 protocol FavoritesViewDelegate: AnyObject {
     func reloadCollectionView()
     func configureCollectionView()
+    func showToast(with: String)
 }
 
 class FavoritesViewController: UIViewController {
@@ -82,6 +83,10 @@ extension FavoritesViewController: FavoritesViewDelegate {
             guard let self = self else { return }
             self.favEmojisCollectionView.reloadData()
         }
+    }
+    
+    func showToast(with message: String) {
+        self.view.showToast(message: message)
     }
 }
 
