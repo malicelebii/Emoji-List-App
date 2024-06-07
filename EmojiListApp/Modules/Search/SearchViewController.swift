@@ -8,7 +8,6 @@ protocol SearchViewDelegate: AnyObject {
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var emojiCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    var counter: Counter?
     var searchViewModel = SearchViewModel()
     
     override func viewDidLoad() {
