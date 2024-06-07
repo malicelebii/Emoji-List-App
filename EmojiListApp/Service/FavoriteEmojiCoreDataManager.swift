@@ -20,12 +20,12 @@ class FavoriteEmojiCoreDataManager: FavoriteEmojiCoreDataDelegate {
         persistentContainer = NSPersistentContainer(name: "FavoriteEmojiModel")
         persistentContainer.loadPersistentStores { description, error in
             if let error = error {
-                print("Error has occured while loading persistent store: \(error.localizedDescription)")
+                print(CoreDataErrorEnum.loadStoreError("Error has occured while loading persistent store: \(error.localizedDescription)").errorMessage)
             }
         }
     }
     
-    func save(favoriteEmoji: Emoji, completion: @escaping () -> ()) {
+    func save(favoriteEmoji: Emoji, completion: @escaping (Result<Void, CoreDataErrorEnum>) -> ()) {
         persistentContainer.performBackgroundTask { context in
             let emoji = FavEmoji(context: context)
             emoji.name = favoriteEmoji.name
@@ -33,25 +33,24 @@ class FavoriteEmojiCoreDataManager: FavoriteEmojiCoreDataDelegate {
             
             do {
                 try context.save()
-                print("kaydeettikk")
-                completion()
+                completion(.success(()))
             } catch {
-             print(error)
+                completion(.failure(.saveError))
             }
         }
     }
     
-    func getFavoriteEmojis(completion: @escaping ([FavEmoji]) -> ()) {
+    func getFavoriteEmojis(completion: @escaping (Result<[FavEmoji], CoreDataErrorEnum>) -> ()) {
         let request: NSFetchRequest<FavEmoji> = FavEmoji.fetchRequest()
         do {
             let emojis = try viewContext.fetch(request)
-            completion(emojis)
+            completion(.success(emojis))
         } catch  {
-            print(error)
+            completion(.failure(.fetchError))
         }
     }
     
-    func deleteEmojiWith(name: String,completion: @escaping () -> ()) {
+    func deleteEmojiWith(name: String,completion: @escaping (Result<Void, CoreDataErrorEnum>) -> ()) {
         let fetchRequest: NSFetchRequest<FavEmoji> = FavEmoji.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "name == %@", name)
             
@@ -61,11 +60,10 @@ class FavoriteEmojiCoreDataManager: FavoriteEmojiCoreDataDelegate {
                     viewContext.delete(emoji)
                 }
                 
-                try viewContext.save() // Değişiklikleri kaydet
-                print("Emoji with name \(name) deleted successfully")
-                completion()
+                try viewContext.save()
+                completion(.success(()))
             } catch {
-                print("Error deleting emoji: \(error)")
+                completion(.failure(.deleteError))
             }
     }
     
