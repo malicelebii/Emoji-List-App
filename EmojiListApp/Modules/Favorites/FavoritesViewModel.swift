@@ -39,26 +39,48 @@ extension FavoritesViewModel: FavoritesViewModelDelegate {
     }
     
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ()) {
-        self.favEmojiCoreDataManager.save(favoriteEmoji: emoji) {
-            completion()
+        self.favEmojiCoreDataManager.save(favoriteEmoji: emoji) { result in
+            switch result {
+            case .success():
+                completion()
+                break
+            case .failure(let error):
+                print(error.errorMessage)
+                break
+            }
         }
     }
     
     func getAllFavoriteEmojis() {
-        self.favEmojiCoreDataManager.getFavoriteEmojis { favEmojis in
-            var emojis = [Emoji]()
-            favEmojis.forEach { favEmoji in
-                let emoji = Emoji(name: favEmoji.name, character: favEmoji.character)
-                emojis.append(emoji)
+        self.favEmojiCoreDataManager.getFavoriteEmojis { result in
+            switch result {
+            case .success(let favEmojis):
+                var emojis = [Emoji]()
+                favEmojis.forEach { favEmoji in
+                    let emoji = Emoji(name: favEmoji.name, character: favEmoji.character)
+                    emojis.append(emoji)
+                }
+                self.favEmojis = emojis
+                break
+            case .failure(let error):
+                print(error.errorMessage)
+                break
             }
-            self.favEmojis = emojis
         }
     }
     
     func deleteFavorite(with name: String) {
-        self.favEmojiCoreDataManager.deleteEmojiWith(name: name) {
-            self.view?.showToast(with: "You have deleted emoji successfully!")
-            self.getAllFavoriteEmojis()
+        self.favEmojiCoreDataManager.deleteEmojiWith(name: name) { result in
+            switch result {
+            case .success():
+                self.view?.showToast(with: "You have deleted emoji successfully!")
+                self.getAllFavoriteEmojis()
+                break
+            case .failure(let error):
+                print(error.errorMessage)
+                break
+            }
+            
         }
     }
 }
