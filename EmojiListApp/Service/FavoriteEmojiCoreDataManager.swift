@@ -2,9 +2,9 @@ import Foundation
 import CoreData
 
 protocol FavoriteEmojiCoreDataDelegate {
-    func save(favoriteEmoji: Emoji, completion: @escaping () -> ())
-    func getFavoriteEmojis(completion: @escaping ([FavEmoji]) -> ())
-    func deleteEmojiWith(name: String, completion: @escaping () -> ())
+    func save(favoriteEmoji: Emoji, completion: @escaping (Result<Void, CoreDataErrorEnum>) -> ())
+    func getFavoriteEmojis(completion: @escaping (Result<[FavEmoji], CoreDataErrorEnum>) -> ())
+    func deleteEmojiWith(name: String, completion: @escaping (Result<Void, CoreDataErrorEnum>) -> ())
 }
 
 class FavoriteEmojiCoreDataManager: FavoriteEmojiCoreDataDelegate {
