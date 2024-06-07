@@ -8,7 +8,6 @@ protocol SearchViewDelegate: AnyObject {
 class SearchViewController: UIViewController {
     @IBOutlet weak var searchBar: UISearchBar!
     var emojiCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewLayout.init())
-    var counter: Counter?
     var searchViewModel = SearchViewModel()
     
     override func viewDidLoad() {
@@ -18,15 +17,6 @@ class SearchViewController: UIViewController {
         searchViewModel.viewDidLoad()
     }
 
-    func configureCollectionView(){
-        emojiCollectionView.dataSource = self
-        emojiCollectionView.delegate = self
-        view.addSubview(emojiCollectionView)
-        setupCollectionViewLayout()
-        emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
-        setupCollectionViewConstraints()
-    }
-    
     func setupCollectionViewLayout() {
         let layout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
@@ -52,6 +42,15 @@ extension SearchViewController: SearchViewDelegate {
             guard let self = self else { return }
             self.emojiCollectionView.reloadData()
         }
+    }
+    
+    func configureCollectionView(){
+        emojiCollectionView.dataSource = self
+        emojiCollectionView.delegate = self
+        view.addSubview(emojiCollectionView)
+        setupCollectionViewLayout()
+        emojiCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
+        setupCollectionViewConstraints()
     }
 }
 

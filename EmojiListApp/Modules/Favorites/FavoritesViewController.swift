@@ -3,6 +3,7 @@ import UIKit
 protocol FavoritesViewDelegate: AnyObject {
     func reloadCollectionView()
     func configureCollectionView()
+    func showToast(with: String)
 }
 
 class FavoritesViewController: UIViewController {
@@ -20,18 +21,7 @@ class FavoritesViewController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        favoritesViewModel.getAllFavoriteEmojis { emojis in
-            self.favoritesViewModel.favEmojis = emojis
-        }
-    }
-    
-    func configureCollectionView() {
-        favEmojisCollectionView.dataSource = self
-        favEmojisCollectionView.delegate = self
-        view.addSubview(favEmojisCollectionView)
-        setupCollectionViewLayout()
-        favEmojisCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
-        setupCollectionViewConstraints()
+        favoritesViewModel.getAllFavoriteEmojis()
     }
     
     func setupCollectionViewLayout() {
@@ -64,12 +54,7 @@ class FavoritesViewController: UIViewController {
         
         ac.addAction(UIAlertAction(title: "Cancel", style: .cancel))
         ac.addAction(UIAlertAction(title: "Yes", style: .destructive, handler: { action in
-            self.favoritesViewModel.deleteFavoriteWith(name: (self.favoritesViewModel.favEmojis[self.selectedCellIndex!].name)!) {
-                self.favoritesViewModel.getAllFavoriteEmojis { emojis in
-                    self.favoritesViewModel.favEmojis = emojis
-                    self.view.showToast(message: "You have deleted emoji successfully")
-                }
-            }
+            self.favoritesViewModel.deleteFavorite(with: (self.favoritesViewModel.favEmojis[self.selectedCellIndex!].name)!)
         }))
         present(ac, animated: true)
     }
@@ -82,6 +67,19 @@ extension FavoritesViewController: FavoritesViewDelegate {
             guard let self = self else { return }
             self.favEmojisCollectionView.reloadData()
         }
+    }
+    
+    func configureCollectionView() {
+        favEmojisCollectionView.dataSource = self
+        favEmojisCollectionView.delegate = self
+        view.addSubview(favEmojisCollectionView)
+        setupCollectionViewLayout()
+        favEmojisCollectionView.register(EmojiCell.self, forCellWithReuseIdentifier: EmojiCell.cellIdentifier)
+        setupCollectionViewConstraints()
+    }
+    
+    func showToast(with message: String) {
+        self.view.showToast(message: message)
     }
 }
 
