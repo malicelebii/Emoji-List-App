@@ -6,8 +6,8 @@ protocol FavoritesViewModelDelegate {
     func numberOfItemsInSection() -> Int
     func cellForItem(at indexPath: IndexPath) -> Emoji
     func addToFavorites(emoji: Emoji, completion: @escaping () -> ())
-    func getAllFavoriteEmojis(completion: @escaping ([Emoji]) -> ())
-    func deleteFavoriteWith(name: String, completion: @escaping () -> ())
+    func getAllFavoriteEmojis()
+    func deleteFavorite(with name: String)
 }
 
 class FavoritesViewModel {
@@ -44,20 +44,21 @@ extension FavoritesViewModel: FavoritesViewModelDelegate {
         }
     }
     
-    func getAllFavoriteEmojis(completion: @escaping ([Emoji]) -> ()) {
+    func getAllFavoriteEmojis() {
         self.favEmojiCoreDataManager.getFavoriteEmojis { favEmojis in
             var emojis = [Emoji]()
             favEmojis.forEach { favEmoji in
                 let emoji = Emoji(name: favEmoji.name, character: favEmoji.character)
                 emojis.append(emoji)
             }
-            completion(emojis)
+            self.favEmojis = emojis
         }
     }
     
-    func deleteFavoriteWith(name: String, completion: @escaping () -> ()) {
+    func deleteFavorite(with name: String) {
         self.favEmojiCoreDataManager.deleteEmojiWith(name: name) {
-            completion()
+            self.view?.showToast(with: "You have deleted emoji successfully!")
+            self.getAllFavoriteEmojis()
         }
     }
 }
