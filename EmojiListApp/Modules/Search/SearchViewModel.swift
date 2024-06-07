@@ -2,7 +2,7 @@ import Foundation
 
 protocol SearchViewModelDelegate {
     var view: SearchViewDelegate? { get set }
-    func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ())
+    func getEmojis(with name: String)
     func viewDidLoad()
     func numberOfItemsInSection() -> Int
     func cellForItem(at indexPath: IndexPath) -> Emoji
@@ -28,11 +28,11 @@ class SearchViewModel {
 
 extension SearchViewModel: SearchViewModelDelegate {
 
-    func getEmojisWith(name: String, completion: @escaping ([Emoji]) -> ()) {
+    func getEmojis(with name: String) {
         networkManager.getEmojisWith(name: name) { result in
             switch result {
             case .success(let emojis):
-                completion(emojis)
+                self.emojis = emojis
                 break
             default :
                 print("Error")
@@ -63,9 +63,7 @@ extension SearchViewModel: SearchViewModelDelegate {
         
         counter?.timer?.invalidate()
         counter = Counter(delay: 1) {
-            self.getEmojisWith(name: searchText) { emojis in
-                self.emojis = emojis
-            }
+            self.getEmojis(with: searchText)
         }
         counter?.call()
     }
